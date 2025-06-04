@@ -2,43 +2,34 @@ package org.cplcursos.ejercicioclaseviispringweb.controladores;
 
 import org.cplcursos.ejercicioclaseviispringweb.DTOs.OficinaDTOLista;
 import org.cplcursos.ejercicioclaseviispringweb.servicios.JardineriaSrvc;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Controller
+@RequestMapping("/oficinas")
 public class OficinaCtrl {
 
     private final JardineriaSrvc jardineriaSrvc;
-    private final Scanner scanner = new Scanner(System.in);
 
     public OficinaCtrl(JardineriaSrvc jardineriaSrvc) {
         this.jardineriaSrvc = jardineriaSrvc;
     }
 
-    public void mostrarListadoOficinas() {
-        System.out.println("\n=== LISTADO DE OFICINAS ===");
-        List<OficinaDTOLista> oficinas = jardineriaSrvc.listarOficinas();
-
-        System.out.printf("%-15s %-20s %-30s %-15s%n",
-                "CÓDIGO", "CIUDAD", "DIRECCIÓN", "TELÉFONO");
-        System.out.println("-".repeat(80));
-
-        for (OficinaDTOLista oficina : oficinas) {
-            System.out.printf("%-15s %-20s %-30s %-15s%n",
-                    oficina.getCodigoOficina(),
-                    oficina.getCiudad(),
-                    oficina.getLineaDireccion1(),
-                    oficina.getTelefono());
-        }
-
-        esperarEnter();
+    @GetMapping("")
+    public String mostrarListaOficinas(Model modelo) {
+        List<OficinaDTOLista> listaOfcinas = jardineriaSrvc.listarOficinas();
+        modelo.addAttribute("listaOficinas", listaOfcinas);
+        return "listaOficinas";
     }
 
-    private void esperarEnter() {
-        System.out.println("\nPresione Enter para continuar...");
-        scanner.nextLine();
+    @GetMapping("/5")
+    public String fichaOficina(Model modelo) {
+
+        return null;
     }
+
 }
