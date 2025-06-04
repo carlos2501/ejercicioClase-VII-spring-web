@@ -31,30 +31,25 @@
         <header>
         
         </header>
-        <main>
-	        <ul>
-		        <li th:each="emp : ${listaEmpleados}" th:text="${emp.getKey()}">
-			        <table>
-				        <tr>
-					        <th>Código</th>
-					        <th>Nombre</th>
-					        <th>Apellidos</th>
-					        <th>Correo</th>
-					        <th>Puesto</th>
-				        </tr>
-				        <tr th:each="l : ${emp.getValue()}">
-					        <td th:text="${l.codigoEmpleado}"></td>
-							<td th:text="${l.nombre}"></td>
-							<td th:text="${l.apellido1} + ' ' + ${emp.apellido2}"></td>
-							<td th:text="${l.email}"></td>
-							<td th:text="${l.puesto}"></td>
-							
-				        </tr>
-			        </table>
-		        </li>
-	        </ul>
-	        
-        </main>
+	    <main>
+		    <table>
+			    <tr>
+				    <th>Código</th>
+				    <th>Nombre</th>
+				    <th>Apellidos</th>
+				    <th>Correo</th>
+				    <th>Puesto</th>
+			    </tr>
+			    <tr th:each="l : ${listaEmpleados}">
+				    <td th:text="${l.codigoEmpleado}"></td>
+				    <td th:text="${l.nombre}"></td>
+				    <td th:text="${l.apellido1} + ' ' + ${l.apellido2}"></td>
+				    <td th:text="${l.email}"></td>
+				    <td th:text="${l.puesto}"></td>
+			    
+			    </tr>
+		    </table>
+	    </main>
         <footer>
         
         </footer>

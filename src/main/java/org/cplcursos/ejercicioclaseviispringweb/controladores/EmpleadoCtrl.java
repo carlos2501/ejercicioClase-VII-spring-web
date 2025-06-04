@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,12 +25,16 @@ public class EmpleadoCtrl {
     @GetMapping({"", "/"})
     public String mostrarEmpleadosPorOficina(Model modelo) {
         List<EmpleadoDTOLista> listaEmpleados = jardineriaSrvc.listarEmpleados();
+        List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
+        modelo.addAttribute("cabeceras", cabeceras);
+        modelo.addAttribute("filas", listaEmpleados);
+
         // Procesamos la lista de empleados para rellenar el Map
-        Map<String, List<EmpleadoDTOLista>> mapEmpleados = listaEmpleados.stream()
+        /*Map<String, List<EmpleadoDTOLista>> mapEmpleados = listaEmpleados.stream()
                 .collect(Collectors.groupingBy(EmpleadoDTOLista::getCiudadOficina)
-                );
-        modelo.addAttribute("listaEmpleados", mapEmpleados);
-        return "listaEmpleados";
+                );*/
+
+        return "vistaLista";
     }
 
     public void mostrarVentasPorEmpleado() {

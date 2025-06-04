@@ -19,11 +19,13 @@ public class OficinaCtrl {
         this.jardineriaSrvc = jardineriaSrvc;
     }
 
-    @GetMapping("")
+    @GetMapping({"", "/"})
     public String mostrarListaOficinas(Model modelo) {
         List<OficinaDTOLista> listaOfcinas = jardineriaSrvc.listarOficinas();
-        modelo.addAttribute("listaOficinas", listaOfcinas);
-        return "listaOficinas";
+        List<String> cabeceras = List.of("Código", "Ciudad", "Dirección 1", "Dirección 2", "Teléfono");
+        modelo.addAttribute("cabeceras", cabeceras);
+        modelo.addAttribute("filas", listaOfcinas);
+        return "vistaLista";
     }
 
     @GetMapping("/5")
