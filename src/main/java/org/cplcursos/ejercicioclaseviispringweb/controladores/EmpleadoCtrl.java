@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,12 +30,18 @@ public class EmpleadoCtrl {
         // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
         // (tipo String) y su valor el valor de dicha propiedad para el EmpleadoDTO... tratado; como no sabemos la clase
         // de esa propiedad, utilizamos un objeto genérico de la clase Object
-        List<Map<String, Object>> datosTabla =listaEmpleados.stream()
-
-
-
-
-
+        List<Map<String, Object>> filas = listaEmpleados.stream()
+                .map(e -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("codigo_empleado", e.getCodigoEmpleado());
+                    map.put("nombre", e.getNombre());
+                    map.put("apellido1", e.getApellido1());
+                    map.put("apellido2", e.getApellido2());
+                    map.put("email", e.getEmail());
+                    map.put("ciudadOficina", e.getCiudadOficina());
+                    map.put("puesto", e.getPuesto());
+                    return map;
+                }).toList();
 
         List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
         listaEmpleados.get(1);
