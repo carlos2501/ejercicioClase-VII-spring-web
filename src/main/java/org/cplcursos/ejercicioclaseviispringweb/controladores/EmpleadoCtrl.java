@@ -25,7 +25,19 @@ public class EmpleadoCtrl {
     @GetMapping({"", "/"})
     public String mostrarEmpleadosPorOficina(Model modelo) {
         List<EmpleadoDTOLista> listaEmpleados = jardineriaSrvc.listarEmpleados();
+        // Procesamos la lista de empleados para rellenar el Map
+        // Convertimos cada EmpleadoDTO... de la lista a un Map<> Siendo la clave el nombre de la propiedad
+        // (tipo String) y su valor el valor de dicha propiedad para el EmpleadoDTO... tratado; como no sabemos la clase
+        // de esa propiedad, utilizamos un objeto genérico de la clase Object
+        List<Map<String, Object>> datosTabla =listaEmpleados.stream()
+
+
+
+
+
+
         List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
+        listaEmpleados.get(1);
         modelo.addAttribute("cabeceras", cabeceras);
         modelo.addAttribute("filas", listaEmpleados);
 

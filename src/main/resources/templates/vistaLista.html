@@ -38,11 +38,7 @@
 				<th th:each="c : ${cabeceras}" th:text="${c}"></th>
 			</tr>
 			<tr th:each="fila : ${filas}">
-				<td th:text="${fila.}"></td>
-				<td th:text="${fila.}"></td>
-				<td th:text="${fila.}></td>
-				<td th:text="${fila.}"></td>
-				<td th:text="${fila.}"></td>
+				<td th:each="col : ${columnas}" th:text="${fila[${col}]}"></td>
 			</tr>
 		</table>
 	</main>
