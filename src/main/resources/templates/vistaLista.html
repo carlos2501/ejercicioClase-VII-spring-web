@@ -38,7 +38,7 @@
 				<th th:each="c : ${cabeceras}" th:text="${c}"></th>
 			</tr>
 			<tr th:each="fila : ${filas}">
-				<td th:each="col : ${columnas}" th:text="${fila[${col}]}"></td>
+				<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
 			</tr>
 		</table>
 	</main>

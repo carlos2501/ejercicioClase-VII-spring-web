@@ -7,11 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Controller
 @RequestMapping("/empleados")
@@ -32,7 +28,7 @@ public class EmpleadoCtrl {
         // de esa propiedad, utilizamos un objeto genérico de la clase Object
         List<Map<String, Object>> filas = listaEmpleados.stream()
                 .map(e -> {
-                    Map<String, Object> map = new HashMap<>();
+                    Map<String, Object> map = new LinkedHashMap<>();
                     map.put("codigo_empleado", e.getCodigoEmpleado());
                     map.put("nombre", e.getNombre());
                     map.put("apellido1", e.getApellido1());
@@ -44,9 +40,8 @@ public class EmpleadoCtrl {
                 }).toList();
 
         List<String> cabeceras = List.of("Código", "Nombre", "Apellidos", "Correo", "Ciudad", "Puesto");
-        listaEmpleados.get(1);
         modelo.addAttribute("cabeceras", cabeceras);
-        modelo.addAttribute("filas", listaEmpleados);
+        modelo.addAttribute("filas", filas);
 
         // Procesamos la lista de empleados para rellenar el Map
         /*Map<String, List<EmpleadoDTOLista>> mapEmpleados = listaEmpleados.stream()
